@@ -7,13 +7,17 @@ import {
   incrementAsync,
   incrementIfOdd,
   selectCount,
+  sayHello,
+  unbreakApp,
+  incrementIfEven,
 } from './counterSlice';
 import styles from './Counter.module.css';
+
 
 export function Counter() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
+  const [incrementAmount, setIncrementAmount] = useState('6');
 
   const incrementValue = Number(incrementAmount) || 0;
 
@@ -34,6 +38,20 @@ export function Counter() {
           onClick={() => dispatch(increment())}
         >
           +
+        </button>
+        <button
+          className={styles.button}
+          aria-label="hello"
+          onClick={() => dispatch(sayHello())}
+        >
+          Say Hello
+        </button>
+        <button
+          className={styles.button}
+          aria-label="unbreak"
+          onClick={() => dispatch(unbreakApp())}
+        >
+          {'unbreak the app ;)'}
         </button>
       </div>
       <div className={styles.row}>
@@ -60,6 +78,12 @@ export function Counter() {
           onClick={() => dispatch(incrementIfOdd(incrementValue))}
         >
           Add If Odd
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => dispatch(incrementIfEven(incrementValue))}
+        >
+          Add If Even
         </button>
       </div>
     </div>

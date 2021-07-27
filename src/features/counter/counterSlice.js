@@ -35,6 +35,12 @@ export const counterSlice = createSlice({
     decrement: (state) => {
       state.value -= 1;
     },
+    sayHello: (state) => {
+      state.value = 'Hello'
+    },
+    unbreakApp: (state) => {
+      state.value = 0;
+    },
     // Use the PayloadAction type to declare the contents of `action.payload`
     incrementByAmount: (state, action) => {
       state.value += action.payload;
@@ -54,7 +60,7 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { increment, decrement, incrementByAmount, sayHello, unbreakApp } = counterSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -69,5 +75,14 @@ export const incrementIfOdd = (amount) => (dispatch, getState) => {
     dispatch(incrementByAmount(amount));
   }
 };
+
+export const incrementIfEven = (amount = 4 ) => (dispatch, getState) => {
+  const currentValue = selectCount(getState());
+  if (currentValue % 5 === 0) {
+    dispatch(incrementByAmount(amount));
+  }
+};
+
+
 
 export default counterSlice.reducer;
